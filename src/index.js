@@ -1,4 +1,6 @@
 import "./styles.css";
+import pizzaImage from "./icons/pizza-svgrepo-com.svg";
+import plateImage from "./icons/basic-restaurant-sign-svgrepo-com.svg";
 const content = document.querySelector(".content");
 let currentPage = ""; //home, menu, about or blank
 
@@ -8,7 +10,7 @@ function createHome() {
     company.id = "company";
     company.classList.add("card");
     const img = document.createElement("img");
-    img.src = "./pizza-svgrepo-com.svg";
+    img.src = pizzaImage;
     img.id = "pizza-logo";
 
     const h1 = document.createElement("h1");
@@ -91,13 +93,52 @@ function createHome() {
   return { makeTitleCard, makeAboutCard, makeHoursCard, makeLocationCard };
 }
 
-function createMenu() {}
+function createMenu() {
+  const makeMenu = () => {
+    const menu = document.createElement("div");
+    menu.classList.add("menu");
+    return menu;
+  };
+  const makeMenuIcon = () => {
+    const img = document.createElement("img");
+    img.src = plateImage;
+    img.classList.add("icon");
+    return img;
+  };
+  const makeMenuItem = (cost, item) => {
+    const container = document.createElement("div");
+    container.classList.add("menu-item");
+
+    const name = document.createElement("span");
+    name.classList.add("item-name");
+    name.textContent = item;
+
+    const dots = document.createElement("span");
+    dots.classList.add("dots");
+
+    const price = document.createElement("span");
+    price.classList.add("item-price");
+    price.textContent = cost;
+
+    container.append(name, dots, price);
+    return container;
+  };
+
+  const makeDrinkHeader = () => {
+    const drinks = document.createElement("h2");
+    drinks.classList.add("drinks");
+    drinks.textContent = "Drinks";
+    return drinks;
+  };
+  return { makeMenu, makeMenuIcon, makeMenuItem, makeDrinkHeader };
+}
 function createAbout() {}
 function setButtons() {
   const home = createHome();
   const homeBtn = document.querySelector("#home-btn");
   homeBtn.addEventListener("click", () => {
     if (currentPage != "home") {
+      removeContent();
       currentPage = "home";
       content.append(home.makeTitleCard());
       content.append(home.makeAboutCard());
@@ -105,11 +146,25 @@ function setButtons() {
       content.append(home.makeLocationCard());
     }
   });
-  const menu = createMenu();
+  const menuManager = createMenu();
   const menuBtn = document.querySelector("#menu-btn");
   menuBtn.addEventListener("click", () => {
     if (currentPage != "menu") {
+      removeContent();
       currentPage = "menu";
+      const menu = menuManager.makeMenu();
+      menu.append(menuManager.makeMenuIcon());
+      menu.append(menuManager.makeMenuItem("$18", "Pepperoni Pizza"));
+      menu.append(menuManager.makeMenuItem("$18", "Cheese Pizza"));
+      menu.append(menuManager.makeMenuItem("$18", "Chicken Garlic Pizza"));
+      menu.append(menuManager.makeMenuItem("$18", "Combo Pizza"));
+      menu.append(menuManager.makeMenuItem("$18", "Vegetarian Pizza"));
+      menu.append(menuManager.makeDrinkHeader());
+      menu.append(menuManager.makeMenuItem("$2", "Coke"));
+      menu.append(menuManager.makeMenuItem("$2", "Pepsi"));
+      menu.append(menuManager.makeMenuItem("$2", "Sprite"));
+      menu.append(menuManager.makeMenuItem("$2", "Fanta"));
+      content.append(menu);
     }
   });
   const clearBtn = document.querySelector("#clear-btn");
