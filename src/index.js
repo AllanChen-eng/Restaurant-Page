@@ -1,23 +1,125 @@
 import "./styles.css";
-console.log("hello World");
 const content = document.querySelector(".content");
+let currentPage = ""; //home, menu, about or blank
 
-function createHome(){
+function createHome() {
+  const makeTitleCard = () => {
+    let company = document.createElement("div");
+    company.id = "company";
+    company.classList.add("card");
+    const img = document.createElement("img");
+    img.src = "./pizza-svgrepo-com.svg";
+    img.id = "pizza-logo";
 
-}
-function createMenu(){
+    const h1 = document.createElement("h1");
+    h1.textContent = "Allan's ";
 
-}
-function createAbout(){
+    const span = document.createElement("span");
+    span.className = "red";
+    span.textContent = " Pizzeria";
 
-}
-function clearContents(){
-    const clearBtn = document.querySelector("#clear-btn");
-    const removeContent = () =>{
-        content.innerHTML="";
-    }
-    clearBtn.addEventListener("click", ()=>{
-        removeContent();
+    h1.appendChild(span);
+    company.appendChild(img);
+    company.appendChild(h1);
+    return company;
+  };
+  const makeAboutCard = () => {
+    const about = document.createElement("div");
+    about.className = "card";
+    about.id = "about-us";
+
+    const h2 = document.createElement("h2");
+    h2.textContent = "Our Mission";
+
+    const p = document.createElement("p");
+    p.appendChild(
+      document.createTextNode(
+        "Here at Allan's Pizzeria, we want to bring top service, quality ingredients and competitive prices to our customers."
+      )
+    );
+    p.appendChild(document.createElement("br"));
+    p.appendChild(
+      document.createTextNode(
+        "We are consistently striving to improve our customer experience. Come by and try out a pizza today!"
+      )
+    );
+
+    about.append(h2);
+    about.append(p);
+    return about;
+  };
+  const makeHoursCard = () => {
+    const hours = document.createElement("div");
+    hours.className = "card";
+    hours.id = "hours";
+
+    const h2 = document.createElement("h2");
+    h2.textContent = "Open Hours";
+
+    const ul = document.createElement("ul");
+
+    const time = [
+      "Mon - Thu: 11am - 10pm",
+      "Fri: 11am - 11:30pm",
+      "Sat: 9am - 11:30pm",
+      "Sun: 9am - 9pm",
+    ];
+
+    time.forEach((text) => {
+      const li = document.createElement("li");
+      li.textContent = text;
+      ul.appendChild(li);
     });
+
+    hours.append(h2, ul);
+    return hours;
+  };
+  const makeLocationCard = () => {
+    const location = document.createElement("div");
+    location.classList.add("card");
+    location.id = "location";
+
+    const heading = document.createElement("h2");
+    heading.textContent = "Find us at:";
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = "123 Fourth Street Dreamland, CA 123456";
+
+    location.append(heading, paragraph);
+    return location;
+  };
+  return { makeTitleCard, makeAboutCard, makeHoursCard, makeLocationCard };
 }
-clearContents();
+
+function createMenu() {}
+function createAbout() {}
+function setButtons() {
+  const home = createHome();
+  const homeBtn = document.querySelector("#home-btn");
+  homeBtn.addEventListener("click", () => {
+    if (currentPage != "home") {
+      currentPage = "home";
+      content.append(home.makeTitleCard());
+      content.append(home.makeAboutCard());
+      content.append(home.makeHoursCard());
+      content.append(home.makeLocationCard());
+    }
+  });
+  const menu = createMenu();
+  const menuBtn = document.querySelector("#menu-btn");
+  menuBtn.addEventListener("click", () => {
+    if (currentPage != "menu") {
+      currentPage = "menu";
+    }
+  });
+  const clearBtn = document.querySelector("#clear-btn");
+  const removeContent = () => {
+    content.innerHTML = "";
+    currentPage = "";
+  };
+  clearBtn.addEventListener("click", () => {
+    removeContent();
+  });
+}
+
+setButtons();

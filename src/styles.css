@@ -1,77 +1,110 @@
-
 * {
-    margin: 0;
-    --menu-color:#fdf6e3;
+  margin: 0;
+  --menu-color: #fdf6e3;
 }
-ul{
-    list-style: none;
+
+p,
+h1,
+h2 {
+  font-size: 1.5rem;
 }
-*, *::before, *::after {
-    box-sizing: border-box;
+
+ul {
+  list-style: none;
 }
-p, h1, h2, h3, h4, h5, h6 {
-    overflow-wrap: break-word;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
 body {
-  height: 100vh;
   margin: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100vh;
 }
-.tab{
-    padding: 30px;
-    border: none;
-    background: var(--menu-color)
+
+.tab {
+  padding: clamp(15px, 2vw, 30px);
+  border: none;
+  background: var(--menu-color);
 }
-.header{
-margin-left: 10vw;
+
+.header {
+  margin-left: 10vw;
   margin-right: 10vw;
   display: flex;
   justify-content: flex-end;
   gap: 5px;
-
 }
+
 .content {
   display: flex;
   flex-direction: column;
   background-color: var(--menu-color);
   justify-content: space-evenly;
-  height: 90vh;
   margin-left: 10vw;
   margin-right: 10vw;
+  padding: 10px 10px 10px 10px;
+  flex-grow: 1;
 }
-h2,p{
-    text-align: center;
+
+h2,
+p {
+  text-align: center;
 }
-h2{
-    font-family: cursive;
+
+h2 {
+  font-family: cursive;
 }
-h1{
-    font-family: sans-serif;
-    color: green;
+
+h1 {
+  font-family: sans-serif;
+  color: green;
 }
-.red{
-    color: #D32F2F;
+
+.red {
+  color: #d32f2f;
 }
-#company{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+
+#company {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
-#hours{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+#hours {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 .footer {
   display: flex;
+  justify-content: center;
   background-color: #eee;
-  padding: 16px;
 }
-#pizza-logo{
-    width: 100px;
-    height: 100px;
+
+.author {
+  font-size: 0.7rem;
+}
+
+#pizza-logo {
+  width: 100px;
+  height: 100px;
 }
