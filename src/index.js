@@ -144,15 +144,15 @@ function createAbout() {
     const chef = document.createElement("img");
     chef.src = chefImage;
     chef.classList.add("profile");
-    container.append(chef,aboutMe);
+    container.append(chef, aboutMe);
     return container;
   };
-  const createTitle = () =>{
+  const createTitle = () => {
     const title = document.createElement("h2");
     title.textContent = "Meet the Chef";
     return title;
-  }
-  return { createDescription,createTitle };
+  };
+  return { createDescription, createTitle };
 }
 
 function setButtons() {
@@ -161,6 +161,7 @@ function setButtons() {
   homeBtn.addEventListener("click", () => {
     if (currentPage != "home") {
       removeContent();
+      console.log("clicked;");
       currentPage = "home";
       content.append(home.makeTitleCard());
       content.append(home.makeAboutCard());
@@ -190,24 +191,21 @@ function setButtons() {
   });
   const aboutManager = createAbout();
   const aboutBtn = document.querySelector("#about-btn");
-  aboutBtn.addEventListener("click", () =>{
-    if(currentPage != "about"){
-        removeContent();
-        currentPage= "about";
-        const about = menuManager.makeMenu();
-        about.append(aboutManager.createTitle());
-        about.append(aboutManager.createDescription());
-        content.append(about);
+  aboutBtn.addEventListener("click", () => {
+    if (currentPage != "about") {
+      removeContent();
+      currentPage = "about";
+      const about = menuManager.makeMenu();
+      about.append(aboutManager.createTitle());
+      about.append(aboutManager.createDescription());
+      content.append(about);
     }
-  })
-  const clearBtn = document.querySelector("#clear-btn");
+  });
   const removeContent = () => {
     content.innerHTML = "";
     currentPage = "";
   };
-  clearBtn.addEventListener("click", () => {
-    removeContent();
-  });
+  homeBtn.click();
 }
 
 setButtons();
