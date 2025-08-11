@@ -1,6 +1,7 @@
 import "./styles.css";
 import pizzaImage from "./icons/pizza-svgrepo-com.svg";
 import plateImage from "./icons/basic-restaurant-sign-svgrepo-com.svg";
+import chefImage from "./icons/chef-svgrepo-com.svg";
 const content = document.querySelector(".content");
 let currentPage = ""; //home, menu, about or blank
 
@@ -132,7 +133,28 @@ function createMenu() {
   };
   return { makeMenu, makeMenuIcon, makeMenuItem, makeDrinkHeader };
 }
-function createAbout() {}
+function createAbout() {
+  const createDescription = () => {
+    const container = document.createElement("div");
+    container.classList.add("info");
+    const text =
+      "From a young age, Allan was always fascinated with pizza. The perfect food for any event. Pizza has the flexibility of taste, accessibility, yet complexity to range from casual game nights, to work meetings, to gourmet meals. Wishing to share the joy of pizza, Allan opened his store in 2025 in a small sleepy corner of Dreamland and took off from there.";
+    const aboutMe = document.createElement("p");
+    aboutMe.textContent = text;
+    const chef = document.createElement("img");
+    chef.src = chefImage;
+    chef.classList.add("profile");
+    container.append(chef,aboutMe);
+    return container;
+  };
+  const createTitle = () =>{
+    const title = document.createElement("h2");
+    title.textContent = "Meet the Chef";
+    return title;
+  }
+  return { createDescription,createTitle };
+}
+
 function setButtons() {
   const home = createHome();
   const homeBtn = document.querySelector("#home-btn");
@@ -155,18 +177,29 @@ function setButtons() {
       const menu = menuManager.makeMenu();
       menu.append(menuManager.makeMenuIcon());
       menu.append(menuManager.makeMenuItem("$18", "Pepperoni Pizza"));
-      menu.append(menuManager.makeMenuItem("$18", "Cheese Pizza"));
-      menu.append(menuManager.makeMenuItem("$18", "Chicken Garlic Pizza"));
-      menu.append(menuManager.makeMenuItem("$18", "Combo Pizza"));
-      menu.append(menuManager.makeMenuItem("$18", "Vegetarian Pizza"));
+      menu.append(menuManager.makeMenuItem("$16", "Cheese Pizza"));
+      menu.append(menuManager.makeMenuItem("$21", "Chicken Garlic Pizza"));
+      menu.append(menuManager.makeMenuItem("$24", "Combo Pizza"));
+      menu.append(menuManager.makeMenuItem("$17", "Vegetarian Pizza"));
       menu.append(menuManager.makeDrinkHeader());
       menu.append(menuManager.makeMenuItem("$2", "Coke"));
-      menu.append(menuManager.makeMenuItem("$2", "Pepsi"));
       menu.append(menuManager.makeMenuItem("$2", "Sprite"));
       menu.append(menuManager.makeMenuItem("$2", "Fanta"));
       content.append(menu);
     }
   });
+  const aboutManager = createAbout();
+  const aboutBtn = document.querySelector("#about-btn");
+  aboutBtn.addEventListener("click", () =>{
+    if(currentPage != "about"){
+        removeContent();
+        currentPage= "about";
+        const about = menuManager.makeMenu();
+        about.append(aboutManager.createTitle());
+        about.append(aboutManager.createDescription());
+        content.append(about);
+    }
+  })
   const clearBtn = document.querySelector("#clear-btn");
   const removeContent = () => {
     content.innerHTML = "";
